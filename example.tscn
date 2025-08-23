@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://3ikl7ryb3a36"]
+
+[ext_resource type="Script" uid="uid://b0v6hvmikp60t" path="res://example.gd" id="1_8lvy3"]
+[ext_resource type="PackedScene" uid="uid://dupeim4n8n1au" path="res://tank.tscn" id="1_n51mc"]
+[ext_resource type="PackedScene" uid="uid://c27cywm3ysmjc" path="res://enemy.tscn" id="2_8lvy3"]
+
+[node name="Example" type="Node2D"]
+script = ExtResource("1_8lvy3")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[node name="Tank" parent="." instance=ExtResource("1_n51mc")]
+position = Vector2(936, 528)
+rotation = -1.5708
+
+[node name="Enemy" parent="." instance=ExtResource("2_8lvy3")]
+position = Vector2(482, 249)
+rotation = 1.5708
+
+[node name="Enemy2" parent="." instance=ExtResource("2_8lvy3")]
+position = Vector2(1414, 182)
+rotation = 1.5708

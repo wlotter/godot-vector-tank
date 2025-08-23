@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dupeim4n8n1au"]
+
+[ext_resource type="Texture2D" uid="uid://bqypi2p6wdt1t" path="res://assets/matrix-tank.png" id="1_6lwfj"]
+[ext_resource type="Script" uid="uid://cjc8cp1gy6p33" path="res://tank.gd" id="1_a62es"]
+[ext_resource type="Texture2D" uid="uid://dvlc76x3xstcq" path="res://assets/matrix-turret.png" id="3_yfqcd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ealj"]
+size = Vector2(57, 59.5)
+
+[node name="Tank" type="Area2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_a62es")
+metadata/_edit_group_ = true
+
+[node name="Chassis" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("1_6lwfj")
+
+[node name="Turret" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("3_yfqcd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -0.25)
+shape = SubResource("RectangleShape2D_1ealj")
