@@ -2,13 +2,16 @@ extends Node2D
 
 @export var bullet_scene: PackedScene
 
-var basic_enemy_scene = preload("res://enemy.tscn")
+var basic_enemy_scene = preload("res://scenes/enemies/enemy.tscn")
 
 var bullet_speed = 400 # should be elsewhere really
 
+var score = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$EnemySpawnTimer.start()
+	pass
+	#$EnemySpawnTimer.start()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -31,13 +34,13 @@ func _process(delta: float) -> void:
 		
 		bullet.position = $Tank.position + shot_spawn_offset / 2
 		bullet.linear_velocity = shot_velocity
-		
-		pass
 
 
-func _on_enemy_spawn_timer_timeout() -> void:
-	var enemy = basic_enemy_scene.instantiate()
-	enemy.position = $EnemySpawn.position
+func _on_enemy_spawner_spawned(enemy: Node2D) -> void:
+	enemy.killed.connect(_on_enemy_killed) # Rep
 	
-	add_child(enemy)
+
+func _on_enemy_killed(kill_score):
+	score += kill_score
+	$HUD.set_score(score)
 	

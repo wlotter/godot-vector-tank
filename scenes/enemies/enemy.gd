@@ -1,7 +1,10 @@
 extends Area2D
 
+var kill_score = 100
 var speed = 200
 var target_position = null
+
+signal killed(score)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,3 +23,9 @@ func _process(delta: float) -> void:
 
 func set_target_position(pos: Vector2):
 	target_position = pos
+
+
+func _on_body_entered(body: Node2D) -> void:
+	queue_free()
+	body.queue_free()
+	killed.emit(kill_score)
