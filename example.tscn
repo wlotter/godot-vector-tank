@@ -1,13 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://3ikl7ryb3a36"]
+[gd_scene load_steps=5 format=3 uid="uid://3ikl7ryb3a36"]
 
 [ext_resource type="Script" uid="uid://b0v6hvmikp60t" path="res://example.gd" id="1_8lvy3"]
 [ext_resource type="PackedScene" uid="uid://dupeim4n8n1au" path="res://tank.tscn" id="1_n51mc"]
 [ext_resource type="PackedScene" uid="uid://c27cywm3ysmjc" path="res://enemy.tscn" id="2_8lvy3"]
+[ext_resource type="PackedScene" uid="uid://0xf7m8mu2lp3" path="res://player_bullet.tscn" id="2_wcwec"]
 
 [node name="Example" type="Node2D"]
 script = ExtResource("1_8lvy3")
+bullet_scene = ExtResource("2_wcwec")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="BackgroundColor" type="ColorRect" parent="."]
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
@@ -23,3 +25,11 @@ rotation = 1.5708
 [node name="Enemy2" parent="." instance=ExtResource("2_8lvy3")]
 position = Vector2(1414, 182)
 rotation = 1.5708
+
+[node name="EnemySpawn" type="Marker2D" parent="."]
+position = Vector2(960, 200)
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 2.5
+
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]

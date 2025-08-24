@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends Area2D
 
 var speed = 200
 var target_position = null

@@ -3,6 +3,7 @@ extends Area2D
 var speed = 400
 var angular_speed = PI
 var viewport_size
+var turret_angle = 90
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -30,9 +31,9 @@ func _process(delta: float) -> void:
 	
 	handle_turret()
 
-
 func handle_turret():
 	var mp = get_viewport().get_mouse_position()
 	var angle = position.angle_to_point(mp)
 	
+	turret_angle = angle
 	$Turret.global_rotation = angle + PI / 2
