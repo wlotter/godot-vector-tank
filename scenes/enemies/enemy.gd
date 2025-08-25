@@ -29,3 +29,5 @@ func _on_body_entered(body: Node2D) -> void:
 	queue_free()
 	body.queue_free()
 	killed.emit(kill_score)
+	
+	

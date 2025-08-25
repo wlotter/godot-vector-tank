@@ -22,10 +22,11 @@ position = Vector2(250, 250)
 position = Vector2(1670, 250)
 
 [node name="Tank" parent="." instance=ExtResource("1_n51mc")]
-position = Vector2(936, 528)
+position = Vector2(960, 540)
 rotation = -1.5708
 
 [node name="HUD" parent="." instance=ExtResource("5_ei00m")]
 
 [connection signal="spawned" from="EnemySpawner" to="." method="_on_enemy_spawner_spawned"]
 [connection signal="spawned" from="EnemySpawner2" to="." method="_on_enemy_spawner_spawned"]
+[connection signal="hit" from="Tank" to="." method="_on_tank_hit"]
