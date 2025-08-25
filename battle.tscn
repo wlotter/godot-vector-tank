@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://3ikl7ryb3a36"]
 
-[ext_resource type="Script" uid="uid://b0v6hvmikp60t" path="res://example.gd" id="1_8lvy3"]
+[ext_resource type="Script" uid="uid://b0v6hvmikp60t" path="res://battle.gd" id="1_8lvy3"]
 [ext_resource type="PackedScene" uid="uid://dupeim4n8n1au" path="res://tank.tscn" id="1_n51mc"]
 [ext_resource type="PackedScene" uid="uid://chthuualahqxu" path="res://scenes/enemies/enemy_spawner.tscn" id="3_ei00m"]
 [ext_resource type="PackedScene" uid="uid://d0wg2j6y5d4x1" path="res://hud.tscn" id="5_ei00m"]
