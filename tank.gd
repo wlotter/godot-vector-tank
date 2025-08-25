@@ -1,5 +1,8 @@
 extends Area2D
 
+@export var bullet_scene: PackedScene
+var bullet_speed = 400 # should be elsewhere really
+
 var speed = 400
 var angular_speed = PI
 var viewport_size: Vector2
@@ -36,6 +39,10 @@ func _process(delta: float) -> void:
 	position = position.clamp(Vector2.ZERO, viewport_size)
 	
 	handle_turret()
+	
+	if Input.is_action_just_pressed("shoot"):
+		shoot()
+
 
 func handle_turret():
 	var mp = get_viewport().get_mouse_position()
@@ -45,19 +52,37 @@ func handle_turret():
 	$Turret.global_rotation = angle + PI / 2
 
 
-func get_tank_rect() -> Rect2:
-	return $CollisionShape2D.shape.get_rect()
+func shoot():
+	var bullet = bullet_scene.instantiate()
+	
+	var angle = turret_angle
+	
+	var shot_vector = Vector2.from_angle(angle)
+	var shot_velocity = bullet_speed * shot_vector
+
+	# Adjustment to put bullet at end of turret
+	var shot_spawn_offset = (
+			shot_vector * 
+			$CollisionShape2D.shape.get_rect().size.x *
+			scale.x
+	)
+	
+	bullet.position = position + shot_spawn_offset / 2
+	bullet.linear_velocity = shot_velocity
+	
+	get_parent().add_child(bullet)
 
 
-func _on_area_entered(area: Area2D) -> void:
+func _on_area_entered(_area: Area2D) -> void:
 	if not invulnerable:
-		print("hi")
 		hit.emit(1)
+		
 		invulnerable = true
-		var invuln_timer = get_tree().create_timer(hit_invulnerability_time)
-		invuln_timer.timeout.connect(_on_invuln_timer_timeout)
 		$Chassis.play("invulnerable")
 		$Turret.play("invulnerable")
+		
+		var invuln_timer = get_tree().create_timer(hit_invulnerability_time)
+		invuln_timer.timeout.connect(_on_invuln_timer_timeout)
 
 
 func _on_invuln_timer_timeout() -> void:

@@ -2,7 +2,9 @@ extends Area2D
 
 var kill_score = 100
 var speed = 200
-var target_position = null
+
+# Node to follow
+var target_node: Node2D
 
 signal killed(score)
 
@@ -12,22 +14,17 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if target_position == null:
+	if target_node == null:
 		return
 	
-	var angle = position.angle_to_point(target_position)
+	var angle = position.angle_to_point(target_node.position)
 	var velocity = Vector2.from_angle(angle)
 	
 	rotation = angle
 	position += speed * velocity * delta
-
-func set_target_position(pos: Vector2):
-	target_position = pos
 
 
 func _on_body_entered(body: Node2D) -> void:
 	queue_free()
 	body.queue_free()
 	killed.emit(kill_score)
-	
-	
