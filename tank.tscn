@@ -1,8 +1,54 @@
-[gd_scene load_steps=5 format=3 uid="uid://dupeim4n8n1au"]
+[gd_scene load_steps=9 format=3 uid="uid://dupeim4n8n1au"]
 
-[ext_resource type="Texture2D" uid="uid://bqypi2p6wdt1t" path="res://assets/matrix-tank.png" id="1_6lwfj"]
+[ext_resource type="Texture2D" uid="uid://bqypi2p6wdt1t" path="res://assets/player/vector-tank.png" id="1_6lwfj"]
 [ext_resource type="Script" uid="uid://cjc8cp1gy6p33" path="res://tank.gd" id="1_a62es"]
-[ext_resource type="Texture2D" uid="uid://dvlc76x3xstcq" path="res://assets/matrix-turret.png" id="3_yfqcd"]
+[ext_resource type="Texture2D" uid="uid://bgoho3liulyyc" path="res://assets/player/invulnerable-vector-tank.png" id="3_lk6ub"]
+[ext_resource type="Texture2D" uid="uid://dvlc76x3xstcq" path="res://assets/player/vector-turret.png" id="3_yfqcd"]
+[ext_resource type="Texture2D" uid="uid://dc80v05m4vj0f" path="res://assets/player/invulnerable-vector-turret.png" id="5_lk6ub"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i433e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6lwfj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6lwfj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_lk6ub")
+}],
+"loop": true,
+"name": &"invulnerable",
+"speed": 4.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yfqcd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_yfqcd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_yfqcd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_lk6ub")
+}],
+"loop": true,
+"name": &"invulnerable",
+"speed": 4.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1ealj"]
 size = Vector2(57, 59.5)
@@ -13,13 +59,15 @@ collision_mask = 2
 script = ExtResource("1_a62es")
 metadata/_edit_group_ = true
 
-[node name="Chassis" type="Sprite2D" parent="."]
+[node name="Chassis" type="AnimatedSprite2D" parent="."]
 rotation = 1.5708
-texture = ExtResource("1_6lwfj")
+sprite_frames = SubResource("SpriteFrames_i433e")
+animation = &"invulnerable"
 
-[node name="Turret" type="Sprite2D" parent="."]
+[node name="Turret" type="AnimatedSprite2D" parent="."]
 rotation = 1.5708
-texture = ExtResource("3_yfqcd")
+sprite_frames = SubResource("SpriteFrames_yfqcd")
+animation = &"invulnerable"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -0.25)

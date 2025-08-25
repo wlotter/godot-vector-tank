@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bqypi2p6wdt1t"
-path="res://.godot/imported/matrix-tank.png-ceb06d5d1441da321b1757dc1038fb19.ctex"
+uid="uid://dvlc76x3xstcq"
+path="res://.godot/imported/vector-turret.png-a01de43b7decab7a2c3fe4ab3621c6b8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/matrix-tank.png"
-dest_files=["res://.godot/imported/matrix-tank.png-ceb06d5d1441da321b1757dc1038fb19.ctex"]
+source_file="res://assets/player/vector-turret.png"
+dest_files=["res://.godot/imported/vector-turret.png-a01de43b7decab7a2c3fe4ab3621c6b8.ctex"]
 
 [params]
 

@@ -26,7 +26,11 @@ func _process(delta: float) -> void:
 		var shot_velocity = bullet_speed * shot_vector
 
 		# Adjustment to put bullet at end of turret
-		var shot_spawn_offset = shot_vector * $Tank/Turret.texture.get_height() * $Tank.scale.y
+		var shot_spawn_offset = (
+				shot_vector * 
+				$Tank.get_tank_rect().size.x *
+				$Tank.scale.y
+		)
 		
 		add_child(bullet)
 		

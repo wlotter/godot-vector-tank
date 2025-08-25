@@ -2,8 +2,11 @@ extends Area2D
 
 var speed = 400
 var angular_speed = PI
-var viewport_size
+var viewport_size: Vector2
 var turret_angle = PI
+
+var invulnerable: bool = false
+var hit_invulnerability_time: float = 2.0
 
 signal hit(damage: int)
 
@@ -42,5 +45,24 @@ func handle_turret():
 	$Turret.global_rotation = angle + PI / 2
 
 
+func get_tank_rect() -> Rect2:
+	return $CollisionShape2D.shape.get_rect()
+
+
 func _on_area_entered(area: Area2D) -> void:
-	hit.emit(1)
+	if not invulnerable:
+		print("hi")
+		hit.emit(1)
+		invulnerable = true
+		var invuln_timer = get_tree().create_timer(hit_invulnerability_time)
+		invuln_timer.timeout.connect(_on_invuln_timer_timeout)
+		$Chassis.play("invulnerable")
+		$Turret.play("invulnerable")
+
+
+func _on_invuln_timer_timeout() -> void:
+	invulnerable = false
+	$Chassis.stop()
+	$Turret.stop()
+	$Chassis.animation = "default"
+	$Turret.animation = "default"
