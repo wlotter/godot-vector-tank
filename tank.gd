@@ -1,9 +1,6 @@
 extends Area2D
 
-@export var bullet_scene: PackedScene
-var bullet_speed = 400 # should be elsewhere really
-
-var speed = 400
+var speed = 300
 var angular_speed = PI
 var viewport_size: Vector2
 var turret_angle = PI
@@ -40,7 +37,7 @@ func _process(delta: float) -> void:
 	
 	handle_turret()
 	
-	if Input.is_action_just_pressed("shoot"):
+	if Input.is_action_pressed("shoot"):
 		shoot()
 
 
@@ -53,12 +50,8 @@ func handle_turret():
 
 
 func shoot():
-	var bullet = bullet_scene.instantiate()
-	
-	var angle = turret_angle
-	
+	var angle = turret_angle	
 	var shot_vector = Vector2.from_angle(angle)
-	var shot_velocity = bullet_speed * shot_vector
 
 	# Adjustment to put bullet at end of turret
 	var shot_spawn_offset = (
@@ -67,10 +60,7 @@ func shoot():
 			scale.x
 	)
 	
-	bullet.position = position + shot_spawn_offset / 2
-	bullet.linear_velocity = shot_velocity
-	
-	get_parent().add_child(bullet)
+	$WeaponGun.fire(get_parent(), position + shot_spawn_offset / 2, shot_vector)
 
 
 func _on_area_entered(_area: Area2D) -> void:
