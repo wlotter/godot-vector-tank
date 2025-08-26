@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dupeim4n8n1au"]
 
 [ext_resource type="Texture2D" uid="uid://bqypi2p6wdt1t" path="res://assets/player/vector-tank.png" id="1_6lwfj"]
-[ext_resource type="Script" uid="uid://cjc8cp1gy6p33" path="res://tank.gd" id="1_a62es"]
+[ext_resource type="Script" uid="uid://cjc8cp1gy6p33" path="res://scenes/player/tank.gd" id="1_a62es"]
 [ext_resource type="Texture2D" uid="uid://bgoho3liulyyc" path="res://assets/player/invulnerable-vector-tank.png" id="3_lk6ub"]
 [ext_resource type="Texture2D" uid="uid://dvlc76x3xstcq" path="res://assets/player/vector-turret.png" id="3_yfqcd"]
 [ext_resource type="Texture2D" uid="uid://dc80v05m4vj0f" path="res://assets/player/invulnerable-vector-turret.png" id="5_lk6ub"]
