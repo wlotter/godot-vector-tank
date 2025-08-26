@@ -3,6 +3,8 @@ extends Area2D
 var kill_score = 100
 var speed = 200
 
+var health = 1
+
 # Node to follow
 var target_node: Node2D
 
@@ -24,7 +26,8 @@ func _process(delta: float) -> void:
 	position += speed * velocity * delta
 
 
-func _on_body_entered(body: Node2D) -> void:
-	queue_free()
-	body.queue_free()
-	killed.emit(kill_score)
+func _on_area_entered(area: Area2D) -> void:
+	health -= area.damage
+	if health < 1:
+		killed.emit(kill_score)
+		queue_free()

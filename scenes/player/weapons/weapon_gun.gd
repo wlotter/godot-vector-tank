@@ -3,6 +3,8 @@ extends Node2D
 @export var projectile: PackedScene
 
 var projectile_speed = 600 
+var projectile_damage = 1
+var projectile_pierce = 0
 
 var cooldown_time: float = 0.2
 var on_cooldown: bool = false
@@ -24,8 +26,11 @@ func fire(parent: Object, origin: Vector2, direction: Vector2) -> void:
 		var bullet = projectile.instantiate()
 		
 		bullet.position = origin
-		bullet.linear_velocity = projectile_speed * direction.normalized()
+		bullet.velocity = projectile_speed * direction.normalized()
 		bullet.set_sprite_rotation(direction.angle() + PI/2)
+		
+		bullet.damage = projectile_damage
+		bullet.pierce = projectile_pierce
 		
 		parent.add_child(bullet)
 		
