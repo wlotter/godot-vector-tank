@@ -63,6 +63,10 @@ func shoot():
 	$WeaponGun.fire(get_parent(), position + shot_spawn_offset / 2, shot_vector)
 
 
+func upgrade_pierce() -> void:
+	$WeaponGun.projectile_pierce += 1
+
+
 func _on_area_entered(_area: Area2D) -> void:
 	if not invulnerable:
 		hit.emit(1)
