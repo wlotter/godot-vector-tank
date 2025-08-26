@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var basic_enemy_scene: PackedScene
+
 var score = 0
 
 var player_health = 3
@@ -14,11 +16,6 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_enemy_spawner_spawned(enemy: Node2D) -> void:
-	enemy.target_node = $Tank
-	enemy.killed.connect(_on_enemy_killed) # Rep
-	
-
 func _on_enemy_killed(kill_score):
 	score += kill_score
 	$HUD.set_score(score)
@@ -29,3 +26,18 @@ func _on_tank_hit(damage: int) -> void:
 	player_health = 0 if player_health < 0 else player_health
 	$HUD.set_health(player_health)
 		
+
+
+func _on_enemy_spawn_timer_timeout() -> void:
+	$EnemySpawnPath/EnemySpawnPathFollow.progress_ratio = randf()
+	
+	var enemy = basic_enemy_scene.instantiate()
+	enemy.position = $EnemySpawnPath/EnemySpawnPathFollow.position
+	enemy.target_node = $Tank
+	enemy.killed.connect(_on_enemy_killed)
+	add_child(enemy)
+
+
+func _on_enemy_spawn_rampup_timer_timeout() -> void:
+	# Reduce time between enemy spawns
+	$EnemySpawnPath/EnemySpawnTimer.wait_time *= 0.9
