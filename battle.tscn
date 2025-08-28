@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://3ikl7ryb3a36"]
+[gd_scene load_steps=6 format=3 uid="uid://3ikl7ryb3a36"]
 
 [ext_resource type="Script" uid="uid://b0v6hvmikp60t" path="res://battle.gd" id="1_8lvy3"]
 [ext_resource type="PackedScene" uid="uid://dupeim4n8n1au" path="res://scenes/player/tank.tscn" id="1_n51mc"]
-[ext_resource type="PackedScene" uid="uid://c27cywm3ysmjc" path="res://scenes/enemies/enemy_truck.tscn" id="2_i431l"]
 [ext_resource type="PackedScene" uid="uid://da4ntn2dywxwi" path="res://scenes/player/power_up.tscn" id="4_6t8i5"]
 [ext_resource type="PackedScene" uid="uid://d0wg2j6y5d4x1" path="res://hud.tscn" id="5_ei00m"]
 
@@ -14,7 +13,6 @@ point_count = 5
 
 [node name="Battle" type="Node2D"]
 script = ExtResource("1_8lvy3")
-basic_enemy_scene = ExtResource("2_i431l")
 
 [node name="BackgroundColor" type="ColorRect" parent="."]
 offset_right = 1920.0
