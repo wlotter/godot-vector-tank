@@ -23,13 +23,6 @@ func _on_enemy_killed(kill_score):
 	$HUD.set_score(score)
 	
 
-func _on_tank_hit(damage: int) -> void:
-	player_health -= damage
-	player_health = 0 if player_health < 0 else player_health
-	$HUD.set_health(player_health)
-		
-
-
 func _on_enemy_spawn_timer_timeout() -> void:
 	$EnemySpawnPath/EnemySpawnPathFollow.progress_ratio = randf()
 	
@@ -48,3 +41,12 @@ func _on_enemy_spawn_rampup_timer_timeout() -> void:
 func mount_pause_menu() -> void:
 	var pause_menu = load("res://scenes/ui/pause_menu.tscn")
 	add_child(pause_menu.instantiate())
+
+
+func _on_tank_health_update(health: int) -> void:
+	$HUD.set_health(health)
+	if health <= 0:
+		get_tree().paused = true
+		var game_over_screen = load("res://scenes/ui/game_over.tscn").instantiate()
+		game_over_screen.set_score_display(score)
+		add_child(game_over_screen)

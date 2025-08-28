@@ -1,5 +1,7 @@
 extends Area2D
 
+var health = 3
+
 var speed = 300
 var angular_speed = PI
 var viewport_size: Vector2
@@ -8,7 +10,7 @@ var turret_angle = PI
 var invulnerable: bool = false
 var hit_invulnerability_time: float = 2.0
 
-signal hit(damage: int)
+signal health_update(health: int)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -69,7 +71,11 @@ func upgrade_pierce() -> void:
 
 func _on_area_entered(_area: Area2D) -> void:
 	if not invulnerable:
-		hit.emit(1)
+		health -= 1
+		if health <= 0:
+			health = 0
+		
+		health_update.emit(health)
 		
 		invulnerable = true
 		$Chassis.play("invulnerable")
