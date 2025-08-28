@@ -13,7 +13,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if Input.is_action_just_pressed("pause game"):
+		mount_pause_menu()
+		get_tree().paused = true
 
 
 func _on_enemy_killed(kill_score):
@@ -41,3 +43,8 @@ func _on_enemy_spawn_timer_timeout() -> void:
 func _on_enemy_spawn_rampup_timer_timeout() -> void:
 	# Reduce time between enemy spawns
 	$EnemySpawnPath/EnemySpawnTimer.wait_time *= 0.9
+
+
+func mount_pause_menu() -> void:
+	var pause_menu = load("res://scenes/ui/pause_menu.tscn")
+	add_child(pause_menu.instantiate())
