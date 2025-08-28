@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfaoe45tdy7qi"]
+
+[ext_resource type="Script" uid="uid://buto7by0y4yk6" path="res://scenes/enemies/enemy_tank_shell.gd" id="1_ifknp"]
+
+[sub_resource type="Gradient" id="Gradient_abaq8"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.804696, 0.20561, 0.368449, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ifknp"]
+gradient = SubResource("Gradient_abaq8")
+width = 16
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h868h"]
+
+[node name="EnemyTankShell" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_ifknp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(5.96046e-07, 4.76837e-07)
+scale = Vector2(1.25, 20)
+texture = SubResource("GradientTexture1D_ifknp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_h868h")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
