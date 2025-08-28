@@ -3,9 +3,10 @@ extends Enemy
 # Node to follow
 var target_node: Node2D
 
+var strafe_direction = 1
+
 var linear_speed = 175
 var strafe_speed = 100
-
 var close_distance_threshold: int = 400
 var far_distance_threshold: int = 600
 
@@ -14,6 +15,7 @@ func _ready() -> void:
 	super()
 	health = 5
 	kill_score = 300
+	strafe_direction = [-1, 1].pick_random()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,7 +32,7 @@ func _process(delta: float) -> void:
 		velocity = -linear_speed * velocity
 	elif distance <= far_distance_threshold:
 		# Player at ideal distance, strafe them!
-		velocity = strafe_speed * velocity.rotated(PI / 2)
+		velocity = strafe_speed * velocity.rotated(strafe_direction * PI / 2)
 	else:
 		# Player is too far, approach!
 		velocity = linear_speed * velocity
