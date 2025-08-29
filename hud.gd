@@ -21,6 +21,10 @@ func _process(delta: float) -> void:
 func set_score(score):
 	$CanvasLayer/Label.text = str(score)
 
+func set_stats(dict: Dictionary) -> void:
+	$CanvasLayer/GridContainer/PierceValue.text = str(dict.get("pierce", 0))
+	$CanvasLayer/GridContainer/ROFValue.text = str(dict.get("rate_of_fire", 5))
+	$CanvasLayer/GridContainer/DamageValue.text = str(dict.get("damage", 1))
 
 func set_health(value: int):
 	for i in range(value):

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://box41g7dbac5k"
-path="res://.godot/imported/pierce-power-up.png-550a5d73c5a0105698f308372951304d.ctex"
+uid="uid://bs7ugtidk1ufg"
+path="res://.godot/imported/damage-up.png-409ea9b52cc13c77954d127ac60b0331.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player/power-up/pierce-power-up.png"
-dest_files=["res://.godot/imported/pierce-power-up.png-550a5d73c5a0105698f308372951304d.ctex"]
+source_file="res://assets/player/power-up/damage-up.png"
+dest_files=["res://.godot/imported/damage-up.png-409ea9b52cc13c77954d127ac60b0331.ctex"]
 
 [params]
 

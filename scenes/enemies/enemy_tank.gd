@@ -24,6 +24,7 @@ func _ready() -> void:
 	health = 7
 	kill_score = 300
 	strafe_direction = [-1, 1].pick_random()
+	enemy_class = Enemy.ENEMY_CLASS.ELITE
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

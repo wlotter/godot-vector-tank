@@ -1,9 +1,12 @@
 extends Area2D
 
-var power_up_type = "pierce"
+var power_up_type = PowerUpFactory.POWER_UP_TYPE.PIERCE
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	print($Sprite2D.texture)
+	print($Sprite2D.visible)
+	print(visible)
 	pass # Replace with function body.
 
 
@@ -12,6 +15,6 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_area_entered(area: Area2D) -> void:
-	area.upgrade_pierce()
-	queue_free()
+func set_texture(texture: CompressedTexture2D) -> void:
+	$Sprite2D.texture = texture
+	

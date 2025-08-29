@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0wg2j6y5d4x1"]
+[gd_scene load_steps=3 format=3 uid="uid://d0wg2j6y5d4x1"]
 
 [ext_resource type="Script" uid="uid://bhr4fxfk7ww36" path="res://hud.gd" id="1_fyqef"]
+[ext_resource type="Theme" uid="uid://b0m0td2f2x6cs" path="res://scenes/ui/hud.tres" id="2_64ctp"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -49,3 +50,48 @@ color = Color(0.223529, 0.65098, 0, 1)
 layout_mode = 2
 size_flags_horizontal = 3
 color = Color(0.223529, 0.65098, 0, 1)
+
+[node name="GridContainer" type="GridContainer" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -80.0
+offset_right = -58.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/h_separation = 50
+columns = 2
+
+[node name="PierceLabel" type="Label" parent="CanvasLayer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("2_64ctp")
+text = "Pierce"
+
+[node name="PierceValue" type="Label" parent="CanvasLayer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("2_64ctp")
+text = "0"
+
+[node name="ROFLabel" type="Label" parent="CanvasLayer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("2_64ctp")
+text = "Rate of Fire"
+
+[node name="ROFValue" type="Label" parent="CanvasLayer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("2_64ctp")
+text = "0"
+
+[node name="DamageLabel" type="Label" parent="CanvasLayer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("2_64ctp")
+text = "Damage"
+
+[node name="DamageValue" type="Label" parent="CanvasLayer/GridContainer"]
+layout_mode = 2
+theme = ExtResource("2_64ctp")
+text = "0"

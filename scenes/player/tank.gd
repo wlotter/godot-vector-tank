@@ -11,6 +11,7 @@ var invulnerable: bool = false
 var hit_invulnerability_time: float = 2.0
 
 signal health_update(health: int)
+signal stat_update(stats: Dictionary)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -65,12 +66,41 @@ func shoot():
 	$WeaponGun.fire(get_parent(), position + shot_spawn_offset / 2, shot_vector)
 
 
+func get_stats() -> Dictionary:
+	return {
+		"pierce": $WeaponGun.projectile_pierce,
+		"rate_of_fire": snapped(1 / $WeaponGun.cooldown_time, 0.01),
+		"damage": $WeaponGun.projectile_damage
+	}
+
+
 func upgrade_pierce() -> void:
 	$WeaponGun.projectile_pierce += 1
+	
+	
+func upgrade_rate_of_fire() -> void:
+	$WeaponGun.cooldown_time = ($WeaponGun.cooldown_time) / (1 + $WeaponGun.cooldown_time)
+	$WeaponGun.projectile_speed *= 1.05
+	
+	
+func upgrade_damage() -> void:
+	$WeaponGun.projectile_damage += 1
 
 
-func _on_area_entered(_area: Area2D) -> void:
-	if not invulnerable:
+func _on_area_entered(area: Area2D) -> void:
+	var power_up_type = area.get("power_up_type")
+	if power_up_type != null:
+		if power_up_type == PowerUpFactory.POWER_UP_TYPE.PIERCE:
+			upgrade_pierce()
+		elif power_up_type == PowerUpFactory.POWER_UP_TYPE.RATE_OF_FIRE:
+			upgrade_rate_of_fire()
+		elif power_up_type == PowerUpFactory.POWER_UP_TYPE.DAMAGE:
+			upgrade_damage()
+			
+		stat_update.emit(get_stats())
+		area.queue_free()
+	
+	elif not invulnerable:
 		health -= 1
 		if health <= 0:
 			health = 0

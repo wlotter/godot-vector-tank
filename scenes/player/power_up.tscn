@@ -1,21 +1,20 @@
 [gd_scene load_steps=4 format=3 uid="uid://da4ntn2dywxwi"]
 
-[ext_resource type="Texture2D" uid="uid://box41g7dbac5k" path="res://assets/player/power-up/pierce-power-up.png" id="1_u5axp"]
 [ext_resource type="Script" uid="uid://dyd1o5g2mtru5" path="res://scenes/player/power_up.gd" id="1_vdtji"]
+[ext_resource type="Texture2D" uid="uid://kmiumb3lrprp" path="res://assets/player/power-up/pierce-up.png" id="2_vdtji"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vdtji"]
 size = Vector2(32, 32)
 
 [node name="PowerUp" type="Area2D"]
 scale = Vector2(2, 2)
-collision_layer = 0
+collision_layer = 16
+collision_mask = 0
 script = ExtResource("1_vdtji")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_u5axp")
+texture = ExtResource("2_vdtji")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_vdtji")
-
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]

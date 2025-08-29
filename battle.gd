@@ -10,7 +10,7 @@ var tank_spawn_divisor = 10 # how often tanks spawn (less is more common)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass
+	$HUD.set_stats($Tank.get_stats())
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -58,3 +58,7 @@ func _on_tank_health_update(health: int) -> void:
 		var game_over_screen = load("res://scenes/ui/game_over.tscn").instantiate()
 		game_over_screen.set_score_display(score)
 		add_child(game_over_screen)
+
+
+func _on_tank_stat_update(stats: Dictionary) -> void:
+	$HUD.set_stats(stats)
