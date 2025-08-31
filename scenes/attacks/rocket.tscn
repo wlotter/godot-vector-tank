@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cg5w3xefukvu6"]
+
+[ext_resource type="Script" uid="uid://utb3ifwi3ey" path="res://scenes/attacks/rocket.gd" id="1_pui43"]
+
+[sub_resource type="Gradient" id="Gradient_dsvkg"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.74902, 0.482353, 0.223529, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_pui43"]
+gradient = SubResource("Gradient_dsvkg")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dsvkg"]
+size = Vector2(10, 10)
+
+[node name="Rocket" type="Area2D"]
+script = ExtResource("1_pui43")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 1.19209e-07)
+scale = Vector2(0.0390625, 10)
+texture = SubResource("GradientTexture1D_pui43")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dsvkg")
+
+[node name="DebugSpawnMarker" type="Marker2D" parent="."]
+position = Vector2(960, 540)
+
+[node name="DebugStop1" type="Marker2D" parent="."]
+position = Vector2(861, 470)
+
+[node name="DebugTarget" type="Marker2D" parent="."]
+position = Vector2(660, 788)

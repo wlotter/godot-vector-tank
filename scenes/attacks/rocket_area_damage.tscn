@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhih3mc28n3ba"]
+
+[ext_resource type="Script" uid="uid://cjoenqrpp2aee" path="res://scenes/attacks/rocket_area_damage.gd" id="1_asadc"]
+
+[sub_resource type="Gradient" id="Gradient_2eu2y"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.898835, 0.127067, 0.203439, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_asadc"]
+gradient = SubResource("Gradient_2eu2y")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2eu2y"]
+size = Vector2(50, 50)
+
+[node name="RocketAreaDamage" type="Area2D"]
+script = ExtResource("1_asadc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3.57628e-06, -8.34465e-07)
+scale = Vector2(0.195312, 50)
+texture = SubResource("GradientTexture1D_asadc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2eu2y")
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
