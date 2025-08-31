@@ -4,9 +4,6 @@ var power_up_type = PowerUpFactory.POWER_UP_TYPE.PIERCE
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	print($Sprite2D.texture)
-	print($Sprite2D.visible)
-	print(visible)
 	pass # Replace with function body.
 
 

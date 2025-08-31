@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://dbv2q7ob50e0p"]
+
+[ext_resource type="Script" uid="uid://dia51udjg01oj" path="res://scenes/enemies/enemy_chopper.gd" id="1_aktfr"]
+[ext_resource type="Texture2D" uid="uid://drc3vthe3f028" path="res://assets/enemies/enemy-chopper-body.png" id="2_aktfr"]
+[ext_resource type="Texture2D" uid="uid://vmgjwqbib1we" path="res://assets/enemies/enemy-chopper-rotor.png" id="3_i86ba"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aktfr"]
+size = Vector2(29, 46)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i86ba"]
+size = Vector2(21, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qf0s4"]
+size = Vector2(7, 18)
+
+[node name="EnemyChopper" type="Area2D"]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_aktfr")
+metadata/_custom_type_script = "uid://c2j3pqy7whe5i"
+metadata/_edit_group_ = true
+
+[node name="ChopperBody" type="Sprite2D" parent="."]
+texture = ExtResource("2_aktfr")
+
+[node name="ChopperRotor" type="Sprite2D" parent="."]
+texture = ExtResource("3_i86ba")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5.5, 0)
+shape = SubResource("RectangleShape2D_aktfr")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-19.5, -0.5)
+shape = SubResource("RectangleShape2D_i86ba")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(23.5, 0)
+shape = SubResource("RectangleShape2D_qf0s4")
+
+[node name="ShotTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="ShotTimer" to="." method="_on_shot_timer_timeout"]

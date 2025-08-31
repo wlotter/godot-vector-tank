@@ -1,30 +1,33 @@
 extends Enemy
 
-var shell_scene = preload("res://scenes/enemies/enemy_tank_shell.tscn")
+
+@export var rocket_scene = preload("res://scenes/attacks/rocket.tscn")
+
+var rotor_switch = 1
 
 # Node to follow
 var target_node: Node2D
 
 var strafe_direction = 1
 
-var linear_speed = 175
-var strafe_speed = 100
+var linear_speed = 225
+var strafe_speed = 150
 var close_distance_threshold: int = 400
 var far_distance_threshold: int = 600
 
-var shell_speed = 400
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	super()
-	health = 7
-	kill_score = 300
-	strafe_direction = [-1, 1].pick_random()
+	health = 3
 	enemy_class = Enemy.ENEMY_CLASS.ELITE
+	kill_score = 300
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	update_rotor()
+	
 	if target_node == null:
 		return
 	
@@ -42,18 +45,41 @@ func _process(delta: float) -> void:
 		velocity = strafe_speed * velocity.rotated(strafe_direction * PI / 2)
 	else:
 		# Player is too far, approach!
-		$ShotTimer.paused = true
+		#$ShotTimer.paused = true
 		velocity = linear_speed * velocity
 		
 	rotation = angle
 	position += velocity * delta
+	
+	
+func update_rotor() -> void:
+	if rotor_switch > 0:
+		$ChopperRotor.rotate(PI / 8)
+	rotor_switch *= -1
 
 
-func _on_shot_timer_timeout() -> void:
-	var shell = shell_scene.instantiate()
-	shell.position = position
+func _on_shot_timer_timeout() -> void:	
+	var rockets = make_rocket_array()
+	for rocket in rockets:
+		get_parent().add_child(rocket)
+
+func make_rocket_array():
+	var off_set_angles = [
+		-deg_to_rad(80),
+		-deg_to_rad(50),
+		deg_to_rad(50),
+		deg_to_rad(80),
+	]
 	
-	var angle_to_player = position.angle_to_point(target_node.position)
+	var rockets = []
 	
-	shell.velocity = shell_speed * Vector2.from_angle(angle_to_player)
-	get_parent().add_child(shell)
+	for angle in off_set_angles:
+		var rocket = rocket_scene.instantiate()
+		rocket.position = position
+		rocket.target_position = target_node.position
+		rocket.stop_one_position = position + \
+				Vector2.from_angle(rotation + angle) * 70
+		
+		rockets.append(rocket)
+		
+	return rockets

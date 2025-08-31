@@ -13,6 +13,7 @@ gradient = SubResource("Gradient_2eu2y")
 size = Vector2(50, 50)
 
 [node name="RocketAreaDamage" type="Area2D"]
+collision_layer = 8
 script = ExtResource("1_asadc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

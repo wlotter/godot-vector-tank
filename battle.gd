@@ -2,11 +2,22 @@ extends Node2D
 
 var enemy_truck = preload("res://scenes/enemies/enemy_truck.tscn")
 var enemy_tank = preload("res://scenes/enemies/enemy_tank.tscn")
+var enemy_chopper = preload("res://scenes/enemies/enemy_chopper.tscn")
+
+var minion_pool = [
+	enemy_truck
+]
+
+var elite_pool = [
+	enemy_tank,
+	enemy_chopper,
+]
 
 var score = 0
 
 var spawn_count = 1 # how many enemies have spawned so far
-var tank_spawn_divisor = 10 # how often tanks spawn (less is more common)
+var elite_spawn_divisor = 10 # how often tanks spawn (less is more common)
+#var elite_spawn_divisor = 5 # TODO debug
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -28,7 +39,8 @@ func _on_enemy_killed(kill_score):
 func _on_enemy_spawn_timer_timeout() -> void:
 	$EnemySpawnPath/EnemySpawnPathFollow.progress_ratio = randf()
 	
-	var enemy_type = enemy_tank if spawn_count % tank_spawn_divisor == 0 else enemy_truck
+	var enemy_type = elite_pool.pick_random() if spawn_count % elite_spawn_divisor == 0 \
+			else minion_pool.pick_random()
 	var enemy = enemy_type.instantiate()
 	
 	enemy.position = $EnemySpawnPath/EnemySpawnPathFollow.position
@@ -42,8 +54,8 @@ func _on_enemy_spawn_timer_timeout() -> void:
 func _on_enemy_spawn_rampup_timer_timeout() -> void:
 	# Reduce time between enemy spawns
 	$EnemySpawnPath/EnemySpawnTimer.wait_time *= 0.9
-	if tank_spawn_divisor > 5:
-		tank_spawn_divisor -= 1
+	if elite_spawn_divisor > 5:
+		elite_spawn_divisor -= 1
 
 
 func mount_pause_menu() -> void:
