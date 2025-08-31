@@ -10,6 +10,8 @@ var turret_angle = PI
 var invulnerable: bool = false
 var hit_invulnerability_time: float = 2.0
 
+var camera: Camera2D
+
 signal health_update(health: int)
 signal stat_update(stats: Dictionary)
 
@@ -46,7 +48,11 @@ func _process(delta: float) -> void:
 
 func handle_turret():
 	var mp = get_viewport().get_mouse_position()
-	var angle = position.angle_to_point(mp)
+	var angle = 0.0
+	if camera:
+		angle = get_viewport_rect().get_center().angle_to_point(mp)
+	else:
+		angle = position.angle_to_point(mp)
 	
 	turret_angle = angle
 	$Turret.global_rotation = angle + PI / 2
