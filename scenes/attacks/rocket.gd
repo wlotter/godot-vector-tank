@@ -23,11 +23,7 @@ var last_distance_from_target = 1000000 # stupidly high to start with
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#position = $DebugSpawnMarker.position
-	#stop_one_position = $DebugStop1.position
 	stop_one_velocity = stop_one_speed * (stop_one_position - position).normalized()
-	
-	#target_position = $DebugTarget.position
 	target_velocity = target_speed * (target_position - position).normalized()
 
 
@@ -51,8 +47,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			last_distance_from_target = current_distance_from_target
 			position += target_velocity * delta
-		
-		
+
 
 func _after_stop_one_wait() -> void:
 	phase = APPROACHING_TARGET

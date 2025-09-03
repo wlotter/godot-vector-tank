@@ -24,12 +24,3 @@ texture = SubResource("GradientTexture1D_pui43")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_dsvkg")
-
-[node name="DebugSpawnMarker" type="Marker2D" parent="."]
-position = Vector2(960, 540)
-
-[node name="DebugStop1" type="Marker2D" parent="."]
-position = Vector2(861, 470)
-
-[node name="DebugTarget" type="Marker2D" parent="."]
-position = Vector2(660, 788)

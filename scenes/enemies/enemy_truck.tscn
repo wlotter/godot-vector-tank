@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dmxkpd411q3dh" path="res://assets/enemy-truck.png" id="2_2kak0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7k104"]
-size = Vector2(64, 64)
+size = Vector2(32, 32)
 
 [node name="Enemy" type="Area2D" groups=["enemies"]]
 collision_layer = 2
@@ -13,7 +13,6 @@ script = ExtResource("1_11ey1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
-scale = Vector2(2, 2)
 texture = ExtResource("2_2kak0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
