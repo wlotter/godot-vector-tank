@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://bk7pbt1473374"]
+
+[ext_resource type="Script" uid="uid://bkysfsco77kea" path="res://scenes/player/tower/gun_tower.gd" id="1_101ja"]
+[ext_resource type="PackedScene" uid="uid://bls435foomiia" path="res://scenes/player/weapons/weapon_gun.tscn" id="2_8ceis"]
+
+[sub_resource type="Gradient" id="Gradient_d0ywp"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0.858824, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_101ja"]
+gradient = SubResource("Gradient_d0ywp")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d0ywp"]
+radius = 200.0
+
+[node name="GunTower" type="Node2D"]
+script = ExtResource("1_101ja")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -7.15256e-07)
+scale = Vector2(0.1875, 48)
+texture = SubResource("GradientTexture1D_101ja")
+
+[node name="TowerRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="TowerRangeShape" type="CollisionShape2D" parent="TowerRange"]
+shape = SubResource("CircleShape2D_d0ywp")
+
+[node name="WeaponGun" parent="." instance=ExtResource("2_8ceis")]
